@@ -6,9 +6,6 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const GlobalStyle = createGlobalStyle`
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -49,14 +46,22 @@ q:before, q:after {
 	content: none;
 }
 
-*{
-	box-sizing: border-box;
-}
-
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+button {
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+
+*{
+	box-sizing: border-box;
+}
+
 
 a {
   text-decoration: none;
@@ -65,9 +70,9 @@ a {
 `;
 
 const colorThem = {
-  pooterBg: "#25262a",
-  pooterTitle: "hsl(210,8%,75%)",
-  pooterLink: "hsl(210,8%,60%)",
+  footerBg: "#25262a",
+  footerTitle: "hsl(210,8%,75%)",
+  footerLink: "hsl(210,8%,60%)",
 };
 
 root.render(
