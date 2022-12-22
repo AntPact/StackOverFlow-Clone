@@ -48,6 +48,11 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+
+*{
+	box-sizing: border-box;
+}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -59,7 +64,11 @@ a {
 
 `;
 
-const colorThem = {};
+const colorThem = {
+  pooterBg: "#25262a",
+  pooterTitle: "hsl(210,8%,75%)",
+  pooterLink: "hsl(210,8%,60%)",
+};
 
 root.render(
   <React.StrictMode>

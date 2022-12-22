@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
   },
   {
-    path: "/:questionId",
+    path: "/:questionId", //useParams()를 쓸때 ":"이용
     element: <QuestionDetail />,
   },
   {
