@@ -46,6 +46,7 @@ q:before, q:after {
 	content: none;
 }
 
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -56,7 +57,6 @@ button {
 	background-color: transparent;
 	cursor: pointer;
 }
-
 
 *{
 	box-sizing: border-box;
