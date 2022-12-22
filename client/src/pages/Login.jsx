@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import Header from "../components/Header";
 
@@ -110,7 +111,24 @@ const SignupBox1 = styled.div`
   margin-top: 12px;
 `;
 
+const ErrorText = styled.p`
+  color: red;
+  margin: 2px 0;
+  padding: 2px;
+  font-size: 12px;
+`;
+
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+  console.log(errors);
+  const onValid = (data) => {
+    // console.log(data);
+  };
   return (
     <>
       <Header />
@@ -165,17 +183,37 @@ export default function Login() {
             <BtnText>Log in with Facebook</BtnText>
           </FacebookBtn>
         </LoginSocial>
-        <LoginFormBox>
+        <LoginFormBox onSubmit={handleSubmit(onValid)}>
           <InputBox>
-            <InputText htmlFor="">Email</InputText>
-            <EmailInput type="text" />
+            <InputText htmlFor="email">Email</InputText>
+            {
+              <EmailInput
+                type="text"
+                {...register("email", {
+                  required: "Email cannot be empty.",
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "The email is not a valid email address.",
+                  },
+                })}
+              />
+            }
+            {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
           </InputBox>
           <InputBox>
             <PwText>
-              <InputText htmlFor="">Password</InputText>
+              <InputText htmlFor="password">Password</InputText>
               <PwLink href="/users/account-recovery">Forgot password?</PwLink>
             </PwText>
-            <PwInput type="password" />
+            <PwInput
+              type="password"
+              {...register("password", {
+                required: "Password cannot be empty.",
+              })}
+            />
+            {errors.password && (
+              <ErrorText>{errors.password.message}</ErrorText>
+            )}
           </InputBox>
           <LoginBtn>Log in</LoginBtn>
         </LoginFormBox>
@@ -187,6 +225,7 @@ export default function Login() {
               href="https://careers.stackoverflow.com/employer/login"
               name="talent"
             >
+              {" "}
               Sign up on Talent
               <svg
                 aria-hidden="true"
