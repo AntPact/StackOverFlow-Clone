@@ -66,6 +66,7 @@ const LoginFormBox = styled.form`
   box-shadow: rgb(0 0 0 / 5%) 0px 10px 24px, rgb(0 0 0 / 5%) 0px 20px 48px,
     rgb(0 0 0 / 10%) 0px 1px 4px;
   margin-bottom: 24px;
+  position: relative;
 `;
 
 const InputBox = styled.div`
@@ -73,19 +74,43 @@ const InputBox = styled.div`
 `;
 
 const InputText = styled.label`
-  margin: 2px 0;
   padding: 0 2px;
   font-weight: bold;
 `;
 
 const EmailInput = styled.input`
   width: 100%;
+  margin-top: 5px;
   padding: 0.6em 0.7em;
   border-radius: 3px;
   border: 1px solid hsl(210, 8%, 75%);
+  position: relative;
+  border-color: ${(props) => (props.error ? "#de4f54" : "")};
+  /* box-shadow: ${(props) =>
+    props.error ? "0 0 0 4px #f7e1e1, 0 0 0 4px #f7e1e1" : ""}; */
+  &:focus {
+    outline: none;
+    border-color: ${(props) => (props.error ? "#de4f54" : "#6bbbf7")};
+    border-width: 1px;
+    box-shadow: ${(props) =>
+      props.error
+        ? "0 0 0 4px #f7e1e1, 0 0 0 4px #f7e1e1"
+        : "0 0 0 4px #cce9fe, 0 0 0 4px #cce9fe"};
+  }
 `;
 
 const PwInput = styled(EmailInput)``;
+
+const ErrorIcon = styled.div`
+  position: absolute;
+  right: 3%;
+  top: 32.5%;
+  pointer-events: none;
+`;
+
+const ErrorBox = styled.div`
+  position: relative;
+`;
 
 const PwText = styled.div`
   display: flex;
@@ -113,7 +138,7 @@ const SignupBox1 = styled.div`
 
 const ErrorText = styled.p`
   color: red;
-  margin: 2px 0;
+  margin-top: 5px;
   padding: 2px;
   font-size: 12px;
 `;
@@ -125,8 +150,31 @@ export default function Login() {
     formState: { errors },
     watch,
   } = useForm();
-  console.log(errors);
-  const onValid = (data) => {
+
+  console.log(errors.password?.message);
+  console.log(errors.email?.message);
+
+  const EMAIL_REGEX =
+    /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/;
+  const PASSWORD_REGEX = /(?=.*\d)(?=.*[a-z]).{8,}/;
+
+  const emailRegister = register("email", {
+    required: { value: true, message: "Email cannot be empty." },
+    pattern: {
+      value: EMAIL_REGEX,
+      message: "The email is not a valid email address.",
+    },
+  });
+
+  const passwordRegister = register("password", {
+    required: { value: true, message: "Password cannot be empty." },
+    pattern: {
+      value: PASSWORD_REGEX,
+      message: "The password is not a valid password address.",
+    },
+  });
+
+  const onSubmit = (data) => {
     // console.log(data);
   };
   return (
@@ -183,37 +231,61 @@ export default function Login() {
             <BtnText>Log in with Facebook</BtnText>
           </FacebookBtn>
         </LoginSocial>
-        <LoginFormBox onSubmit={handleSubmit(onValid)}>
+        <LoginFormBox onSubmit={handleSubmit(onSubmit)}>
           <InputBox>
             <InputText htmlFor="email">Email</InputText>
-            {
+            <ErrorBox>
               <EmailInput
                 type="text"
-                {...register("email", {
-                  required: "Email cannot be empty.",
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "The email is not a valid email address.",
-                  },
-                })}
+                error={errors.email?.message === undefined ? "" : "error"}
+                {...emailRegister}
               />
-            }
-            {errors.email && <ErrorText>{errors.email.message}</ErrorText>}
+              {errors.email?.message === undefined ? null : (
+                <ErrorIcon>
+                  <svg
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                  >
+                    <path
+                      d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z"
+                      fill="red"
+                    ></path>
+                  </svg>
+                </ErrorIcon>
+              )}
+            </ErrorBox>
+            <ErrorText>{errors.email?.message}</ErrorText>
           </InputBox>
           <InputBox>
             <PwText>
               <InputText htmlFor="password">Password</InputText>
               <PwLink href="/users/account-recovery">Forgot password?</PwLink>
             </PwText>
-            <PwInput
-              type="password"
-              {...register("password", {
-                required: "Password cannot be empty.",
-              })}
-            />
-            {errors.password && (
-              <ErrorText>{errors.password.message}</ErrorText>
-            )}
+            <ErrorBox>
+              <PwInput
+                type="password"
+                error={errors.password?.message === undefined ? "" : "error"}
+                {...passwordRegister}
+              />
+              {errors.password?.message === undefined ? null : (
+                <ErrorIcon>
+                  <svg
+                    aria-hidden="true"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                  >
+                    <path
+                      d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z"
+                      fill="red"
+                    ></path>
+                  </svg>
+                </ErrorIcon>
+              )}
+            </ErrorBox>
+            <ErrorText>{errors.password?.message}</ErrorText>
           </InputBox>
           <LoginBtn>Log in</LoginBtn>
         </LoginFormBox>
