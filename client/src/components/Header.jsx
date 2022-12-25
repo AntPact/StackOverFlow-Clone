@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LogoImg from "../assets/sprites.svg";
 import DefaultAvatar from "../assets/default-avatar.svg";
-import { Icon } from "style-components";
+import Icon from "../assets/favicons.png";
 
 export const Gnb = styled.header`
   position: fixed;
@@ -14,7 +14,6 @@ export const Gnb = styled.header`
   box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
     0 2px 8px hsla(0, 0%, 0%, 0.05);
   border-top: 3px solid #f48223;
-  box-sizing: border-box;
   z-index: 1;
   > div {
     display: flex;
@@ -74,7 +73,7 @@ export const Logo = styled.div`
   margin-left: 15px;
   cursor: pointer;
   @media screen and (min-width: 641px) {
-    width: 150px;
+    /* width: 150px; */
     padding: 0 8px;
     margin-left: 0;
   }
@@ -484,7 +483,7 @@ export const Lshape = styled.div`
 `;
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [isSearch, setIsSearch] = useState(false);
   const [togglePopUp, setTogglePopUp] = useState(false);
   const [userInfo, setUserInfo] = useState();
