@@ -1,98 +1,138 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LayoutContainer from "./LayoutContainer";
 
-const FooterBox = styled.footer`
-  background-color: ${(props) => props.theme.footerBg};
+export const Container = styled.footer`
+  padding: 16px;
+  background-color: hsl(210, 8%, 15%);
+  color: hsl(210, 8%, 75%);
+  font-size: 11px;
+  position: relative;
+  z-index: 2;
+  &.remove {
+    display: none;
+  }
+  @media screen and (min-width: 641px) {
+    padding: 24px;
+    font-size: 13px;
+  }
+  @media screen and (min-width: 880px) {
+    padding: 28px 12px;
+  }
+  a {
+    display: inline-block;
+  }
+  svg {
+    display: none;
+    @media screen and (min-width: 641px) {
+      display: block;
+    }
+  }
+  > div {
+    @media screen and (min-width: 981px) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 `;
 
-const Wrap = styled.div`
-  display: flex;
-  max-width: 1264px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-flow: row wrap;
-  padding: 32px 12px 12px 12px;
+export const MediumContainer = styled.div`
+  @media screen and (min-width: 641px) {
+    display: flex;
+    gap: 30px;
+  }
+  @media screen and (min-width: 981px) {
+    width: 100%;
+  }
 `;
 
-const FooterLogo = styled.div`
-  flex: 0 0 64px;
-  margin: -12px 0 32px 0;
+export const Categories = styled.ul`
+  @media screen and (min-width: 641px) {
+    margin-top: 30px;
+  }
+  @media screen and (min-width: 817px) {
+    display: inline-flex;
+    width: calc(100% - 37px);
+  }
 `;
 
-const FooterNav = styled.nav`
-  display: flex;
-  flex: 2 1 auto;
-  flex-wrap: wrap;
-`;
-
-const FooterTitle = styled.h5`
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: ${(props) => props.theme.footerTitle};
-`;
-
-const FooterLink = styled.a`
-  color: ${(props) => props.theme.footerTitle};
-`;
-
-const FooterLink2 = styled.a`
-  color: ${(props) => props.theme.footerLink};
-  padding: 4px 0;
-  display: inline-block;
-`;
-
-const FooterList = styled.ul`
-  margin: 0;
-  list-style: none;
-`;
-
-const FooterLi = styled.li`
-  margin-top: 16px;
-`;
-
-const FooterCopyright = styled.div`
-  flex: 1 1 150px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const FooterSocial = styled.ul`
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
-
-const SocialLi = styled.li`
-  margin-left: 12px;
-`;
-
-const FooterCol = styled.div`
-  flex: 1 0 auto;
+export const Categoriy = styled.li`
   padding: 0 12px 24px 0;
+  @media screen and (min-width: 817px) {
+    width: 100%;
+    margin-left: 30px;
+  }
+  @media screen and (min-width: 981px) {
+    width: 25%;
+  }
+  > p {
+    font-weight: 800;
+    margin-bottom: 8px;
+    white-space: nowrap;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    row-gap: 8px;
+    color: hsl(210, 8%, 60%);
+    font-weight: 400;
+    @media screen and (min-width: 817px) {
+      flex-direction: column;
+    }
+    li {
+      cursor: pointer;
+      white-space: nowrap;
+      &:hover {
+        color: hsl(210, 8%, 65%);
+      }
+      a {
+        color: inherit;
+      }
+    }
+  }
 `;
 
-const ColP = styled.p`
-  margin-top: auto;
-  margin-bottom: 24px;
-  color: ${(props) => props.theme.footerLink};
-`;
-
-const ColLink = styled.a`
-  line-height: inherit;
-  padding: 0;
-  color: ${(props) => props.theme.footerLink};
-  text-decoration: underline;
+export const SocialsAndCopy = styled.ul`
+  font-size: 11px;
+  color: hsl(210, 8%, 60%);
+  margin-top: 24px;
+  @media screen and (min-width: 641px) {
+    font-size: 13px;
+  }
+  @media screen and (min-width: 880px) {
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media screen and (min-width: 981px) {
+    width: 347px;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 12px;
+    row-gap: 8px;
+    color: hsl(210, 8%, 60%);
+    font-weight: 400;
+    margin-bottom: 8px;
+    li {
+      cursor: pointer;
+      &:hover {
+        color: hsl(210, 8%, 65%);
+      }
+    }
+  }
 `;
 
 export default function Footer() {
   return (
-    <FooterBox>
-      <Wrap>
-        <FooterLogo>
-          <a href="https://stackoverflow.com" aria-label="Stack Overflow">
+    <Container>
+      <LayoutContainer>
+        <MediumContainer>
+          <Link to="/">
             <svg aria-hidden="true" width="32" height="37" viewBox="0 0 32 37">
               <path d="M26 33v-9h4v13H0V24h4v9h22Z" fill="#BCBBBB"></path>
               <path
@@ -100,196 +140,71 @@ export default function Footer() {
                 fill="#F48024"
               ></path>
             </svg>
-          </a>
-        </FooterLogo>
-        <FooterNav>
-          <FooterCol>
-            <FooterTitle>
-              <FooterLink href="https://stackoverflow.com">
-                Stack Overflow
-              </FooterLink>
-            </FooterTitle>
-            <FooterList>
-              <li>
-                <FooterLink2 href="/">Questions</FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="/help">Help</FooterLink2>
-              </li>
-            </FooterList>
-          </FooterCol>
-          <FooterCol>
-            <FooterTitle>
-              <FooterLink href="https://stackoverflow.co/">Products</FooterLink>
-            </FooterTitle>
-            <FooterList>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/teams">
-                  Teams
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/advertising">
-                  Advertising
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/collectives">
-                  Collectives
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/talent">
-                  Talent
-                </FooterLink2>
-              </li>
-            </FooterList>
-          </FooterCol>
-          <FooterCol>
-            <FooterTitle>
-              <FooterLink href="https://stackoverflow.co/">Company</FooterLink>
-            </FooterTitle>
-            <FooterList>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/">
-                  About
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/company/press">
-                  Press
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/company/work-here">
-                  Work Here
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.com/legal">
-                  Legal
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.com/legal/privacy-policy">
-                  Privacy Policy
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.com/legal/terms-of-service">
-                  Terms of Service
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.co/company/contact">
-                  Contact Us
-                </FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="#">Cookie Settings</FooterLink2>
-              </li>
-              <li>
-                <FooterLink2 href="https://stackoverflow.com/legal/cookie-policy">
-                  Cookie Policy
-                </FooterLink2>
-              </li>
-            </FooterList>
-          </FooterCol>
-          <FooterCol>
-            <div>
-              <FooterTitle>
-                <FooterLink href="https://stackexchange.com">
-                  Stack Exchange Network
-                </FooterLink>
-              </FooterTitle>
-              <FooterList>
+          </Link>
+          <Categories>
+            <Categoriy>
+              <p>STACK OVERFLOW</p>
+              <ul>
                 <li>
-                  <FooterLink2 href="https://stackexchange.com/sites#technology">
-                    Technology
-                  </FooterLink2>
+                  <Link to="/">Questions</Link>
                 </li>
-                <li>
-                  <FooterLink2 href="https://stackexchange.com/sites#culturerecreation">
-                    Culture &amp; recreation
-                  </FooterLink2>
-                </li>
-                <li>
-                  <FooterLink2 href="https://stackexchange.com/sites#lifearts">
-                    Life &amp; arts
-                  </FooterLink2>
-                </li>
-                <li>
-                  <FooterLink2 href="https://stackexchange.com/sites#science">
-                    Science
-                  </FooterLink2>
-                </li>
-                <li>
-                  <FooterLink2 href="https://stackexchange.com/sites#professional">
-                    Professional
-                  </FooterLink2>
-                </li>
-                <li>
-                  <FooterLink2 href="https://stackexchange.com/sites#business">
-                    Business
-                  </FooterLink2>
-                </li>
-
-                <FooterLi>
-                  <FooterLink2 href="https://api.stackexchange.com/">
-                    API
-                  </FooterLink2>
-                </FooterLi>
-
-                <li>
-                  <FooterLink2 href="https://data.stackexchange.com/">
-                    Data
-                  </FooterLink2>
-                </li>
-              </FooterList>
-            </div>
-          </FooterCol>
-        </FooterNav>
-        <FooterCopyright>
-          <FooterSocial>
-            <li>
-              <FooterLink2 href="https://stackoverflow.blog?blb=1">
-                Blog
-              </FooterLink2>
-            </li>
-            <SocialLi>
-              <FooterLink2 href="https://www.facebook.com/officialstackoverflow/">
-                Facebook
-              </FooterLink2>
-            </SocialLi>
-            <SocialLi>
-              <FooterLink2 href="https://twitter.com/stackoverflow">
-                Twitter
-              </FooterLink2>
-            </SocialLi>
-            <SocialLi>
-              <FooterLink2 href="https://linkedin.com/company/stack-overflow">
-                LinkedIn
-              </FooterLink2>
-            </SocialLi>
-            <SocialLi>
-              <FooterLink2 href="https://www.instagram.com/thestackoverflow">
-                Instagram
-              </FooterLink2>
-            </SocialLi>
-          </FooterSocial>
-
-          <ColP>
+                <li>Help</li>
+              </ul>
+            </Categoriy>
+            <Categoriy>
+              <p>PRODUCTS</p>
+              <ul>
+                <li>Teams</li>
+                <li>Advertising</li>
+                <li>Collectives</li>
+                <li>Talent</li>
+              </ul>
+            </Categoriy>
+            <Categoriy>
+              <p>COMPANY</p>
+              <ul>
+                <li>About</li>
+                <li>Press</li>
+                <li>Work Here</li>
+                <li>Legal</li>
+                <li>Privacy Policy</li>
+                <li>Terms of Service</li>
+                <li>Contact Us</li>
+                <li>Cookis Settings</li>
+                <li>Cookis Policy</li>
+              </ul>
+            </Categoriy>
+            <Categoriy>
+              <p>STACK EXCHANGE NETWORK</p>
+              <ul>
+                <li>Technology</li>
+                <li>Culture &#38; recreation</li>
+                <li>Life &#38; arts</li>
+                <li>Science</li>
+                <li>Professional</li>
+                <li>Business</li>
+                <li>API</li>
+                <li>Data</li>
+              </ul>
+            </Categoriy>
+          </Categories>
+        </MediumContainer>
+        <SocialsAndCopy>
+          <li>
+            <ul>
+              <li>Blog</li>
+              <li>Facebook</li>
+              <li>Twitter</li>
+              <li>LinkedIn</li>
+              <li>Instagram</li>
+            </ul>
+          </li>
+          <li>
             Site design / logo © 2022 Stack Exchange Inc; user contributions
-            licensed under{" "}
-            <span>
-              <ColLink href="https://stackoverflow.com/help/licensing">
-                CC BY-SA
-              </ColLink>
-            </span>
-            . <span>rev&nbsp;2022.12.21.43126</span>
-          </ColP>
-        </FooterCopyright>
-      </Wrap>
-    </FooterBox>
+            licensed under CC BY-SA. rev 2022.10.25.33519
+          </li>
+        </SocialsAndCopy>
+      </LayoutContainer>
+    </Container>
   );
 }

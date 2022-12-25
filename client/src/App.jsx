@@ -1,7 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
+import Mypage from "./pages/Mypage";
 import NotFound from "./pages/NotFound";
 import QuestionDetail from "./pages/QuestionDetail";
 import QuestionsList from "./pages/QuestionsList";
@@ -39,13 +41,16 @@ const router = createBrowserRouter([
     path: "/users",
     element: <Users />,
   },
+  {
+    path: "/mypage",
+    element: <Mypage />,
+  },
 ]);
 
 function App() {
   return (
     <>
-      <Header />
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </>
   );
 }

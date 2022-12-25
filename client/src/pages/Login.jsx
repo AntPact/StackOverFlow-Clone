@@ -2,27 +2,27 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 
-const LoginBox = styled.div`
+export const LoginBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
   background-color: #f1f2f4;
   min-height: 100vh;
 `;
 
-const LoginLogo = styled.div`
+export const LoginLogo = styled.div`
   margin-bottom: 24px;
 `;
 
-const LoginSocial = styled.div`
+export const LoginSocial = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
 `;
 
-const GoogleBtn = styled.button`
+export const GoogleBtn = styled.button`
   width: 300px;
   padding: 10px;
   margin: 4px 0px;
@@ -32,33 +32,33 @@ const GoogleBtn = styled.button`
   justify-content: center;
   border-radius: 5px;
   border: 1px solid hsl(210, 8%, 85%);
+  cursor: pointer;
 `;
 
-const BtnText = styled.span`
+export const BtnText = styled.span`
   margin-left: 5px;
 `;
 
-const GithubBtn = styled(GoogleBtn)`
+export const GithubBtn = styled(GoogleBtn)`
   background-color: #2f3338;
   color: white;
 `;
 
-const FacebookBtn = styled(GithubBtn)`
+export const FacebookBtn = styled(GithubBtn)`
   background-color: #365499;
 `;
 
-const LoginBtn = styled(GithubBtn)`
+export const LoginBtn = styled(GithubBtn)`
   color: white;
   background-color: #1495fd;
   width: 252px;
 `;
 
-const LoginFormBox = styled.form`
+export const LoginFormBox = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 300px;
-  height: 260px;
+  width: 252px;
   padding: 24px;
   background-color: white;
   border-radius: 7px;
@@ -68,17 +68,18 @@ const LoginFormBox = styled.form`
   position: relative;
 `;
 
-const InputBox = styled.div`
+export const InputBox = styled.div`
   margin: 6px 0;
 `;
 
-const InputText = styled.label`
+export const InputText = styled.label`
   padding: 0 2px;
   font-weight: bold;
 `;
 
-const EmailInput = styled.input`
-  width: 100%;
+export const EmailInput = styled.input`
+  width: 238px;
+  min-width: 238px;
   margin-top: 5px;
   padding: 0.6em 0.7em;
   border-radius: 3px;
@@ -98,44 +99,50 @@ const EmailInput = styled.input`
   }
 `;
 
-const PwInput = styled(EmailInput)``;
+export const PwInput = styled(EmailInput)``;
 
-const ErrorIcon = styled.div`
+export const ErrorIcon = styled.div`
   position: absolute;
   right: 3%;
   top: 32.5%;
   pointer-events: none;
 `;
 
-const ErrorBox = styled.div`
+export const ErrorBox = styled.div`
   position: relative;
 `;
 
-const PwText = styled.div`
+export const PwText = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const PwLink = styled.a`
+export const PwLink = styled.a`
   font-size: 12px;
   color: hsl(206, 100%, 40%);
+  &:visited {
+    color: #0e7bce;
+  }
+  &:hover {
+    color: #379fef;
+  }
 `;
 
-const SignupLink = styled(PwLink)`
+export const SignupLink = styled(PwLink)`
   font-size: 13px;
 `;
 
-const SignupBox = styled.div`
+export const SignupBox = styled.div`
   padding: 16px;
   text-align: center;
   font-size: 13px;
 `;
 
-const SignupBox1 = styled.div`
+export const SignupBox1 = styled.div`
   margin-top: 12px;
 `;
 
-const ErrorText = styled.p`
+export const ErrorText = styled.p`
   color: red;
   margin-top: 5px;
   padding: 2px;
@@ -147,11 +154,10 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm();
 
-  console.log(errors.password?.message);
-  console.log(errors.email?.message);
+  console.log(errors);
+  console.log(register());
 
   const EMAIL_REGEX =
     /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/;
@@ -173,8 +179,8 @@ export default function Login() {
     },
   });
 
-  const onSubmit = (data) => {
-    // console.log(data);
+  const onSubmit = (das) => {
+    console.log(das);
   };
   return (
     <LoginBox>
