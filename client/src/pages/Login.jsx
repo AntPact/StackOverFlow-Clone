@@ -58,7 +58,7 @@ export const LoginFormBox = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 252px;
+  width: 300px;
   padding: 24px;
   background-color: white;
   border-radius: 7px;
@@ -78,8 +78,8 @@ export const InputText = styled.label`
 `;
 
 export const EmailInput = styled.input`
-  width: 238px;
-  min-width: 238px;
+  width: 252px;
+  min-width: 252px;
   margin-top: 5px;
   padding: 0.6em 0.7em;
   border-radius: 3px;
@@ -179,8 +179,8 @@ export default function Login() {
     },
   });
 
-  const onSubmit = (das) => {
-    console.log(das);
+  const onSubmit = (data) => {
+    console.log(data);
   };
   return (
     <LoginBox>

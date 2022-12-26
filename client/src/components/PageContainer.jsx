@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 export const Container = styled.div`
-  box-sizing: border-box;
   min-height: 100vh;
   margin-left: 0px;
   padding-top: 47px;

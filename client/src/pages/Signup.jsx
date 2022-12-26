@@ -79,7 +79,7 @@ export const SingupFormBox = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 252px;
+  width: 300px;
   padding: 24px;
   background-color: white;
   border-radius: 7px;
@@ -99,7 +99,7 @@ export const InputText = styled.label`
 `;
 
 export const EmailInput = styled.input`
-  width: 238px;
+  width: 252px;
   margin-top: 5px;
   padding: 0.6em 0.7em;
   border-radius: 3px;
@@ -225,6 +225,66 @@ export const SignUp2 = styled.div`
   }
 `;
 
+const TestBox = styled.div`
+  margin: 6px 0;
+  padding: 8px 0px 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(210, 8%, 95%);
+  border-color: hsl(210, 8%, 90%);
+  border-radius: 3px;
+  border-width: 1px;
+`;
+
+const RecaptchaBox = styled.div`
+  width: 164px;
+  height: 144px;
+`;
+
+const AdBox = styled.div`
+  display: flex;
+  margin: 6px 0;
+`;
+
+const CheckBox = styled.input`
+  margin-right: 4px;
+  vertical-align: middle;
+  border-radius: 3px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 1em;
+  height: 1em;
+  border: 1px solid hsl(210, 8%, 75%);
+  outline: 0;
+  background-color: white;
+`;
+
+const AdInfo = styled.label`
+  line-height: 1rem;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 0 2px;
+  color: hsl(210, 8%, 5%);
+`;
+
+const QuestionBox = styled.div`
+  margin-left: 4px;
+  margin-top: 2px;
+`;
+
+const QuestionMark = styled.a``;
+
+const Requisition = styled.p`
+  color: hsl(210, 8%, 45%);
+  font-size: 12px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+`;
+
 export default function Signup() {
   const EMAIL_REGEX =
     /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/;
@@ -316,21 +376,6 @@ export default function Signup() {
                 error={errors.nickname?.message === undefined ? "" : "error"}
                 {...nicknameRegister}
               />
-              {/* {errors.email?.message === undefined ? null : (
-                <ErrorIcon>
-                  <svg
-                    aria-hidden="true"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                  >
-                    <path
-                      d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z"
-                      fill="red"
-                    ></path>
-                  </svg>
-                </ErrorIcon>
-              )} */}
             </ErrorBox>
             {/* <ErrorText>{errors.nickname?.message}</ErrorText> */}
           </InputBox>
@@ -385,7 +430,49 @@ export default function Signup() {
               )}
             </ErrorBox>
             <ErrorText>{errors.password?.message}</ErrorText>
+            <Requisition>
+              Passwords must contain at least eight
+              <br /> characters, including at least 1 letter and 1 number.
+            </Requisition>
           </InputBox>
+          <TestBox>
+            <RecaptchaBox>
+              <iframe
+                title="reCAPTCHA"
+                src="https://www.google.com/recaptcha/api2/anchor?ar=2&amp;k=6Lfmm70ZAAAAADvPzM6OhZ8Adi40-78E-aYfc1ZS&amp;co=aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbTo0NDM.&amp;hl=en&amp;v=5qcenVbrhOy8zihcc2aHOWD4&amp;size=compact&amp;cb=3unij7lmwk0y"
+                width="164"
+                height="144"
+                role="presentation"
+                name="a-9911dfsh95jz"
+                frameborder="0"
+                scrolling="no"
+                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
+              ></iframe>
+            </RecaptchaBox>
+          </TestBox>
+          <AdBox>
+            <CheckBox type="checkbox" />
+            <AdInfo>
+              Opt-in to receive occasional product updates, user research
+              invitations, company announcements, and digests.
+            </AdInfo>
+            <QuestionBox>
+              <QuestionMark>
+                <svg
+                  aria-hidden="true"
+                  class="svg-icon iconHelpSm"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    d="M7 1C3.74 1 1 3.77 1 7c0 3.26 2.77 6 6 6 3.27 0 6-2.73 6-6s-2.73-6-6-6Zm1.06 9.06c-.02.63-.48 1.02-1.1 1-.57-.02-1.03-.43-1.01-1.06.02-.63.5-1.04 1.08-1.02.6.02 1.05.45 1.03 1.08Zm.73-3.07-.47.3c-.2.15-.36.36-.44.6a3.6 3.6 0 0 0-.08.65c0 .04-.03.14-.16.14h-1.4c-.14 0-.16-.09-.16-.13-.01-.5.11-.99.36-1.42A4.6 4.6 0 0 1 7.7 6.07c.15-.1.21-.21.3-.33.18-.2.28-.47.28-.74.01-.67-.53-1.14-1.18-1.14-.9 0-1.18.7-1.18 1.46H4.2c0-1.17.31-1.92.98-2.36a3.5 3.5 0 0 1 1.83-.44c.88 0 1.58.16 2.2.62.58.42.88 1.02.88 1.82 0 .5-.17.9-.43 1.24-.15.2-.44.47-.86.79h-.01Z"
+                    fill="rgb(106, 115, 124)"
+                  ></path>
+                </svg>
+              </QuestionMark>
+            </QuestionBox>
+          </AdBox>
           <SignupBtn>Sign up</SignupBtn>
           <SignUp2>
             By clicking “Sign up”, you agree to our{" "}

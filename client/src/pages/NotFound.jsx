@@ -28,7 +28,6 @@ const Icon = styled.p`
 `;
 
 const Contents = styled.div`
-  box-sizing: border-box;
   padding: 16px;
   color: #232629;
   @media screen and (min-width: 641px) {

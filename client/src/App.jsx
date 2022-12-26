@@ -1,6 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Mypage from "./pages/Mypage";

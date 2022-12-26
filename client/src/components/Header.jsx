@@ -17,7 +17,6 @@ export const Gnb = styled.header`
   z-index: 1;
   > div {
     display: flex;
-    box-sizing: border-box;
     width: 100%;
     max-width: 1215px;
     padding: 0 12px 0 0;
@@ -73,7 +72,6 @@ export const Logo = styled.div`
   margin-left: 15px;
   cursor: pointer;
   @media screen and (min-width: 641px) {
-    /* width: 150px; */
     padding: 0 8px;
     margin-left: 0;
   }
@@ -204,7 +202,6 @@ export const Search = styled.input`
   top: 61px;
   width: calc(100% - 20px);
   height: 32.6px;
-  box-sizing: border-box;
   padding-left: 34px;
   border: 1px solid hsl(210, 8%, 75%);
   border-radius: 2px;
@@ -356,7 +353,6 @@ export const MobileSearchButton = styled.div`
 
 export const Button = styled.div`
   height: 30px;
-  box-sizing: border-box;
   padding: 8.4px 8px 6.4px 8px;
   border-radius: 2px;
   border: 1px solid black;
@@ -383,7 +379,6 @@ export const LogoutPop = styled.div`
   top: 44px;
   width: 100vw;
   background-color: hsl(210, 8%, 95%);
-  box-sizing: border-box;
   box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
     0 2px 8px hsla(0, 0%, 0%, 0.05);
   @media screen and (min-width: 641px) {
