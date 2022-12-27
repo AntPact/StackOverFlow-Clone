@@ -8,8 +8,8 @@ import Sidebar from "../components/Sidebar";
 export default function QuestionsList() {
   return (
     <>
-      <Sidebar />
       <Header />
+      <Sidebar />
       <LayoutContainer>
         <PageContainer>QuestionsList</PageContainer>
       </LayoutContainer>

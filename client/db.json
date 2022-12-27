@@ -1,0 +1,52 @@
+{
+  "login": [
+    {
+      "email": "luckseok1@gmail.com",
+      "password": "123",
+      "id": 1
+    },
+    {
+      "email": "luckseok1@gmail.com",
+      "password": "seok135712",
+      "id": 2
+    },
+    {
+      "email": "nikemania1987@gmail.com",
+      "password": "qwdwqdw!123",
+      "id": 3
+    },
+    {
+      "email": "gustjrskfnxh@naver.com",
+      "password": "dqwdqwdq12312321",
+      "id": 4
+    },
+    {
+      "email": "dwqdwq1@namvi.com",
+      "password": "caskoneijnfei!@#231",
+      "id": 5
+    },
+    {
+      "email": "dsa@navcad.com",
+      "password": "dsadwqd@e313123WD",
+      "id": 6
+    },
+    {
+      "email": "dsadsad@naver.ocmnx",
+      "password": "asdojasodj1321",
+      "id": 7
+    },
+    {
+      "email": "dasdas@nav.com",
+      "password": "dsadsadsad!123",
+      "id": 8
+    }
+  ],
+  "signup": [
+    {
+      "email": "dsadsad@naver.ocmnx",
+      "password": "dasdsad2131231das",
+      "nickname": "dsadsa",
+      "id": 1
+    }
+  ]
+}
