@@ -4,6 +4,7 @@ import styled from "styled-components";
 import LogoImg from "../assets/sprites.svg";
 import DefaultAvatar from "../assets/default-avatar.svg";
 import Icon from "../assets/favicons.png";
+import { useSelector } from "react-redux";
 
 export const Gnb = styled.header`
   position: fixed;
@@ -14,7 +15,7 @@ export const Gnb = styled.header`
   box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
     0 2px 8px hsla(0, 0%, 0%, 0.05);
   border-top: 3px solid #f48223;
-  z-index: 1;
+  z-index: 2;
   > div {
     display: flex;
     width: 100%;
@@ -478,7 +479,8 @@ export const Lshape = styled.div`
 `;
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(true);
+  const isLogin = useSelector((state) => state.isLogin);
+  console.log(isLogin);
   const [isSearch, setIsSearch] = useState(false);
   const [togglePopUp, setTogglePopUp] = useState(false);
   const [userInfo, setUserInfo] = useState();
@@ -490,9 +492,11 @@ export default function Header() {
           <MobileMenuBtn>
             <span></span>
           </MobileMenuBtn>
-          <Logo>
-            <p></p>
-          </Logo>
+          <Link to="/">
+            <Logo>
+              <p></p>
+            </Logo>
+          </Link>
           <MenuNav>
             {isLogin ? (
               <p className="disabled">Products</p>
@@ -663,9 +667,7 @@ export default function Header() {
                         </Row>
                       </MenuRows>
                     </LogoutPop>
-                  ) : (
-                    ""
-                  )}
+                  ) : null}
                 </li>
               </ul>
             ) : (
