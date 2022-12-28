@@ -61,12 +61,10 @@ export default function Tags() {
   };
   const data2 = async () => {
     try {
-      const tagList = await (
-        await axios.get(
-          `https://api.stackexchange.com/2.3/tags?pagesize=100&order=${order}&sort=${sort}&inname=${value}&site=stackoverflow`
-        )
-      ).data;
-      setTags(tagList.items);
+      const tagList = await await axios.get(
+        `https://api.stackexchange.com/2.3/tags?pagesize=100&order=${order}&sort=${sort}&inname=${value}&site=stackoverflow`
+      );
+      setTags(tagList);
     } catch (error) {
       throw new Error(error);
     }
@@ -110,7 +108,6 @@ export default function Tags() {
     //     });
     // }
   }, [value, sort]);
-  console.log(order);
   return (
     <>
       <Header />

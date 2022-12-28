@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import LayoutContainer from "./LayoutContainer";
@@ -81,6 +80,7 @@ const PublicList = styled.li`
 
 export default function Sidebar() {
   const { pathname } = useLocation();
+  console.log(useLocation());
   return (
     <LayoutContainer>
       <SideMenu>
