@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Mypage from "./pages/Mypage";
 import NotFound from "./pages/NotFound";
+import QuestionAsk from "./pages/QuestionAsk";
 import QuestionDetail from "./pages/QuestionDetail";
 import QuestionsList from "./pages/QuestionsList";
 import Signup from "./pages/Signup";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/:questionId", //useParams()를 쓸때 ":"이용
     element: <QuestionDetail />,
+  },
+  {
+    path: "/ask", //useParams()를 쓸때 ":"이용
+    element: <QuestionAsk />,
   },
   {
     path: "/login",

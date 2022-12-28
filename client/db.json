@@ -39,6 +39,26 @@
       "email": "dasdas@nav.com",
       "password": "dsadsadsad!123",
       "id": 8
+    },
+    {
+      "email": "dwqdqw@nave.com",
+      "password": "asdokpdwpq`23231",
+      "id": 9
+    },
+    {
+      "email": "fewfewf@wfewf.rgerg",
+      "password": "dwqfewfgregwg3g45",
+      "id": 10
+    },
+    {
+      "email": "dedwfefew@hrfs.trh",
+      "password": "gregegeg54t53434",
+      "id": 11
+    },
+    {
+      "email": "dqwdwa@gnaeklf.com",
+      "password": "saofijewofgnoew123",
+      "id": 12
     }
   ],
   "signup": [
@@ -47,6 +67,12 @@
       "password": "dasdsad2131231das",
       "nickname": "dsadsa",
       "id": 1
+    },
+    {
+      "email": "wqdwd@naver.com",
+      "password": "eowfjeoikofmkew123",
+      "nickname": "ewqewq",
+      "id": 2
     }
   ]
 }
