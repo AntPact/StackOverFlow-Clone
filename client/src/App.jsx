@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Header from "./components/Header";
+
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Mypage from "./pages/Mypage";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     element: <QuestionDetail />,
   },
   {
-    path: "/ask", //useParams()를 쓸때 ":"이용
+    path: "/ask",
     element: <QuestionAsk />,
   },
   {

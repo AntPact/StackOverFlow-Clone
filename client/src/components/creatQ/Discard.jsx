@@ -17,7 +17,7 @@ const DiscardContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 100;
+  z-index: 9999;
 `;
 
 const DiscardModal = styled.div`
@@ -45,7 +45,7 @@ const DiscardBtn = styled.button`
   border: none;
   font-size: 13px;
   border-radius: 3px;
-  &:hover {
+  &:active {
     background: hsl(358deg 62% 47%);
     cursor: pointer;
   }

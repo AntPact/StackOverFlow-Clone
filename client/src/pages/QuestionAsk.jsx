@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
@@ -53,6 +53,9 @@ const Notice = styled.div`
   border: 1px solid hsl(206deg 93% 84%);
   border-radius: 3px;
 
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
   h2 {
     font-size: 1.3rem;
     font-weight: 400;
@@ -93,6 +96,9 @@ const QuestionTitle = styled.div`
   background: white;
   border: 1px solid hsl(210deg 8% 90%);
   border-radius: 3px;
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 const Form = styled.form`
@@ -137,6 +143,9 @@ const QuestionBody = styled.div`
   border: 1px solid hsl(210deg 8% 90%);
   border-radius: 3px;
   position: relative;
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 const DimmedLayerBody = styled.div`
@@ -148,6 +157,7 @@ const DimmedLayerBody = styled.div`
   background: white;
   opacity: 0.7;
   z-index: 5;
+  cursor: not-allowed;
 `;
 
 const Title = styled.div`
@@ -170,6 +180,9 @@ const QuestionTags = styled.div`
   border: 1px solid hsl(210deg 8% 90%);
   border-radius: 3px;
   position: relative;
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 const DimmedLayerTags = styled.div`
@@ -181,6 +194,7 @@ const DimmedLayerTags = styled.div`
   background: white;
   opacity: 0.7;
   z-index: 5;
+  cursor: not-allowed;
 `;
 
 // 질문 입력 및 취소 버튼
@@ -253,9 +267,11 @@ const DimmedLayerBtn = styled.div`
   background: white;
   opacity: 0.7;
   z-index: 100;
+  cursor: not-allowed;
 `;
 
 const AskLayer = styled(DimmedLayerBtn)`
+  width: 135px;
   background-color: #f8faf9;
   z-index: 99;
 `;
@@ -287,8 +303,11 @@ export default function QuestionAsk() {
   const [secondBtnActive, setSecondBtnActive] = useState({ display: "block" });
   const [submitBtnActive, setSubmitBtnActive] = useState({ display: "block" });
 
+  const [discard, setDiscard] = useState({ visibility: "hidden" });
+
   // 입력창 활성화 및 카드 함수
   const onActiveFirstBody = () => {
+    setDiscard({ visibility: "visible" });
     setFirstStyle({ display: "none" });
     setTitleCardOpen({ visibility: "hidden" });
     setfirstBodyCardOpen({ visibility: "visible" });
@@ -313,6 +332,8 @@ export default function QuestionAsk() {
     formState: { errors },
     setValue,
   } = useForm();
+
+  console.log(register());
 
   // 타이틀 외 바디 onChange 함수
   const handleFirstEditorChange = (value) => {
@@ -515,7 +536,9 @@ export default function QuestionAsk() {
                 setValue={setValue}
               />
             )}
-            <DiscardBtn onClick={onDiscardModal}>Discard draft</DiscardBtn>
+            <DiscardBtn onClick={onDiscardModal} style={discard}>
+              Discard draft
+            </DiscardBtn>
           </BtnContainer>
         </LayoutContainer>
       </Content>
