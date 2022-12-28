@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import TagsHeader from "../components/TagsHeader";
 import styled from "styled-components";
 import TagCard from "../components/TagCard";
+import useScrollTop from "../util/useScrollTop";
 
 const TagsBox = styled.div`
   padding: 24px;
@@ -32,6 +33,7 @@ const TagBoxGrid = styled.ul`
 `;
 
 export default function Tags() {
+  useScrollTop();
   const [tags, setTags] = useState([]);
 
   // 페이지네이션

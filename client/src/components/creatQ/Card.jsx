@@ -9,6 +9,11 @@ const CardContainer = styled.div`
   border: 1px solid hsl(210deg 8% 85%);
   border-radius: 3px;
   color: #232629;
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+  @media (max-width: 1100px) {
+    display: none;
+  }
 `;
 
 const CardTitle = styled.div`
