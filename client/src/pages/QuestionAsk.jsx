@@ -13,6 +13,7 @@ import Discard from "../components/creatQ/Discard";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LayoutContainer from "../components/LayoutContainer";
+import axios from "axios";
 
 const Content = styled.div`
   padding: 50px 0 0 0;
@@ -115,8 +116,8 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: hsl(206deg 100% 52%);
-    box-shadow: 0px 0px 0px 5px #e1ecf4;
+    border-color: #6bbbf7;
+    box-shadow: 0 0 0 4px #cce9fe, 0 0 0 4px #cce9fe;
   }
 `;
 
@@ -186,12 +187,12 @@ const DimmedLayerTags = styled.div`
 const BtnContainer = styled.div`
   position: relative;
   display: flex;
+  background-color: #f8faf9;
 `;
 
 const NextBtn = styled.button`
-  margin-top: 0.7rem;
+  margin-top: 0.5rem;
   margin-right: 1rem;
-  margin-bottom: 48px;
   padding: 10px;
   border: 1px solid #79a7c7;
   border-radius: 3px;
@@ -210,10 +211,13 @@ const NextBtn = styled.button`
 
 const DiscardBtn = styled.button`
   margin-bottom: 48px;
+  margin-left: 20px;
   padding: 10px;
   border: none;
   background: transparent;
   color: #c33e32;
+  height: 40px;
+  text-align: center;
 
   &:hover {
     background: #fcf2f1;
@@ -222,15 +226,38 @@ const DiscardBtn = styled.button`
   }
 `;
 
+const AskBtn = styled.button`
+  padding: 10px;
+  height: 40px;
+  border: 1px solid #79a7c7;
+  border-radius: 3px;
+  background: #0995fd;
+  color: white;
+
+  &:not(:last-child) {
+    margin-top: 0;
+  }
+
+  &:hover {
+    background-color: hsl(206deg 100% 40%);
+    cursor: pointer;
+  }
+`;
+
 const DimmedLayerBtn = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 140px;
+  width: 100%;
   height: 100%;
   background: white;
   opacity: 0.7;
   z-index: 100;
+`;
+
+const AskLayer = styled(DimmedLayerBtn)`
+  background-color: #f8faf9;
+  z-index: 99;
 `;
 
 export default function QuestionAsk() {
@@ -239,7 +266,7 @@ export default function QuestionAsk() {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   // const initialToken = localStorage.getItem("accessToken");
-  const [isError, setIsError] = useState("");
+  // const [isError, setIsError] = useState("");
 
   const [firstStyle, setFirstStyle] = useState({ display: "block" });
   const [secondStyle, setSecondStyle] = useState({ display: "block" });
@@ -280,14 +307,12 @@ export default function QuestionAsk() {
   };
 
   // 타이틀 유효성 체크
-  const { register, handleSubmit } = useForm();
-
-  const validateTitle = (value) => {
-    if (value.length < 15) {
-      return "Title must be at least 15 characters.";
-    }
-    return true;
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
 
   // 타이틀 외 바디 onChange 함수
   const handleFirstEditorChange = (value) => {
@@ -305,7 +330,16 @@ export default function QuestionAsk() {
   };
 
   // 질문 추가하기 POST 요청
-  const addQuestion = (value) => {
+  const addQuestion = async (value) => {
+    try {
+      await axios.post(`http://localhost:3001/question`, {
+        questionTitle: value,
+        questionContent: firstBody + secondBody,
+        tags: tags.map((tag) => ({ tagWord: tag })),
+      });
+    } catch (error) {
+      console.error(error);
+    }
     // fetch(
     //   "http://ec2-43-201-73-28.ap-northeast-2.compute.amazonaws.com:8080/questions/ask",
     //   {
@@ -334,9 +368,9 @@ export default function QuestionAsk() {
   };
 
   // 타이틀 에러 렌더링
-  const onError = (error) => {
-    setIsError(error);
-  };
+  // const onError = (error) => {
+  //   setIsError(error);
+  // };
 
   // discard 모달 오픈
   const onDiscardModal = () => {
@@ -344,12 +378,11 @@ export default function QuestionAsk() {
   };
 
   // 첫 페이지 진입 시 타이틀 인풋에 자동 focus
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
-  useEffect(() => {
-    if (inputRef.current !== null) inputRef.current.focus();
-  }, []);
-
+  // useEffect(() => {
+  //   if (inputRef.current !== null) inputRef.current.focus();
+  // }, []);
   return (
     <>
       <Header />
@@ -398,16 +431,18 @@ export default function QuestionAsk() {
                 <Input
                   type="text"
                   name="title"
-                  ref={inputRef}
+                  // ref={inputRef}
                   placeholder="e.g.Is there an R function for finding the index of an element in a vector?"
                   {...register("title", {
-                    validate: validateTitle,
+                    minLength: {
+                      value: 15,
+                      message: "Title must be at least 15 characters.",
+                    },
                   })}
-                  className={isError.title && "errorInput"}
                 />
               </Form>
-              {isError.title && (
-                <ErrorMessage>{isError.title.message}</ErrorMessage>
+              {errors.title?.message === undefined ? null : (
+                <ErrorMessage>{errors.title?.message}</ErrorMessage>
               )}
               <NextBtn onClick={onActiveFirstBody}>Next</NextBtn>
             </QuestionTitle>
@@ -469,16 +504,15 @@ export default function QuestionAsk() {
             <TagCard tagCardOpen={tagCardOpen} />
           </Container>
           <BtnContainer>
-            <NextBtn onClick={handleSubmit(onSubmit, onError)}>
-              Post your question
-            </NextBtn>
-            <DimmedLayerBtn style={submitBtnActive} />
+            <AskBtn onClick={handleSubmit(onSubmit)}>Post your question</AskBtn>
+            <AskLayer style={submitBtnActive} />
             {discardOpen && (
               <Discard
                 onDiscardModal={onDiscardModal}
                 setFirstBody={setFirstBody}
                 setSecondBody={setSecondBody}
                 setTags={setTags}
+                setValue={setValue}
               />
             )}
             <DiscardBtn onClick={onDiscardModal}>Discard draft</DiscardBtn>

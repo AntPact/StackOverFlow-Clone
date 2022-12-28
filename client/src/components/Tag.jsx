@@ -12,10 +12,18 @@ const Container = styled.div`
   color: black;
   margin: 10px 0 0;
 
+  & {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
   &:focus-within {
     outline: none;
-    border-color: hsl(206deg 100% 52%);
-    box-shadow: 0px 0px 0px 5px #e1ecf4;
+    border-color: #6bbbf7;
+    box-shadow: 0 0 0 4px #cce9fe, 0 0 0 4px #cce9fe;
   }
 `;
 const Input = styled.input`
@@ -89,7 +97,7 @@ function Tag({ tags, setTags }) {
     <Container>
       {tags &&
         tags.map((tag, index) => (
-          <Tags key={`${index.toString()}-${tag}`}>
+          <Tags key={index}>
             {tag}
             <Button onClick={() => deleteTag(index)}>x</Button>
           </Tags>

@@ -82,12 +82,19 @@ const XBtn = styled.button`
   }
 `;
 
-function Discard({ onDiscardModal, setFirstBody, setSecondBody, setTags }) {
+function Discard({
+  onDiscardModal,
+  setFirstBody,
+  setSecondBody,
+  setTags,
+  setValue,
+}) {
   const handlerDiscard = () => {
     setFirstBody("");
     setSecondBody("");
     setTags("");
     onDiscardModal();
+    setValue("title", "");
   };
 
   return (
