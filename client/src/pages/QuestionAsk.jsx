@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import EditorComp from "../components/EditorComp";
-import Tag from "../components/Tag";
+import Tag from "../components/ask/Tag";
 import TitleCard, {
   FirstBodyCard,
   SecondBodyCard,
   TagCard,
-} from "../components/creatQ/Card";
-import Discard from "../components/creatQ/Discard";
+} from "../components/ask/Card";
+import Discard from "../components/ask/Discard";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LayoutContainer from "../components/LayoutContainer";
@@ -282,7 +282,6 @@ export default function QuestionAsk() {
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
   // const initialToken = localStorage.getItem("accessToken");
-  // const [isError, setIsError] = useState("");
 
   const [firstStyle, setFirstStyle] = useState({ display: "block" });
   const [secondStyle, setSecondStyle] = useState({ display: "block" });
@@ -388,22 +387,15 @@ export default function QuestionAsk() {
     navigate("/");
   };
 
-  // 타이틀 에러 렌더링
-  // const onError = (error) => {
-  //   setIsError(error);
-  // };
+  const onPrevent = (e) => {
+    e.preventDefault();
+  };
 
   // discard 모달 오픈
   const onDiscardModal = () => {
     setDiscardOpen(!discardOpen);
   };
 
-  // 첫 페이지 진입 시 타이틀 인풋에 자동 focus
-  // const inputRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (inputRef.current !== null) inputRef.current.focus();
-  // }, []);
   return (
     <>
       <Header />
@@ -448,13 +440,17 @@ export default function QuestionAsk() {
                 Be specific and imagine you’re asking a question to another
                 person.
               </Desc>
-              <Form>
+              <Form onSubmit={onPrevent}>
                 <Input
                   type="text"
                   name="title"
                   // ref={inputRef}
                   placeholder="e.g.Is there an R function for finding the index of an element in a vector?"
                   {...register("title", {
+                    required: {
+                      value: true,
+                      message: "Title is missing.",
+                    },
                     minLength: {
                       value: 15,
                       message: "Title must be at least 15 characters.",
