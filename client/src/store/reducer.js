@@ -1,9 +1,9 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-// const initialToken = localStorage.getItem('accessToken');
+const initialToken = localStorage.getItem("accessToken");
 const initialState = {
-  isLogin: false,
-  //   accessToken: initialToken,
+  isLogin: !!initialToken,
+  accessToken: initialToken,
 };
 
 const loginStore = createSlice({

@@ -186,10 +186,17 @@ export default function Login() {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    await axios.post(`http://localhost:3001/login`, data);
-    dispatch(login());
-    navigate("/");
+    try {
+      await axios.post(`http://localhost:3001/login`, data).then((data) => {
+        console.log(data);
+        dispatch(login());
+        localStorage.clear();
+        localStorage.setItem("accessToken", data);
+        navigate("/");
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>

@@ -7,10 +7,11 @@ import PageContainer from "../components/PageContainer";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
 import { useEffect } from "react";
-import TagsHeader from "../components/TagsHeader";
+import TagsHeader from "../components/tag/TagsHeader";
 import styled from "styled-components";
-import TagCard from "../components/TagCard";
+import TagCard from "../components/tag/TagCard";
 import useScrollTop from "../util/useScrollTop";
+import Pagination from "../components/Pagination";
 
 const TagsBox = styled.div`
   padding: 24px;
@@ -63,10 +64,12 @@ export default function Tags() {
   };
   const data2 = async () => {
     try {
-      const tagList = await await axios.get(
-        `https://api.stackexchange.com/2.3/tags?pagesize=100&order=${order}&sort=${sort}&inname=${value}&site=stackoverflow`
-      );
-      setTags(tagList);
+      const tagList = await (
+        await axios.get(
+          `https://api.stackexchange.com/2.3/tags?pagesize=100&order=${order}&sort=${sort}&inname=${value}&site=stackoverflow`
+        )
+      ).data;
+      setTags(tagList.items);
     } catch (error) {
       throw new Error(error);
     }
@@ -129,6 +132,14 @@ export default function Tags() {
                 <TagCard key={idx} name={tag.name} count={tag.count} />
               ))}
             </TagBoxGrid>
+            <Pagination
+              total={tags.length}
+              limit={limit}
+              page={page}
+              setPage={setPage}
+              setLimit={setLimit}
+              disable
+            />
           </TagsBox>
         </PageContainer>
       </LayoutContainer>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import LayoutContainer from "./LayoutContainer";
 
@@ -80,6 +80,7 @@ const PublicList = styled.li`
 
 export default function Sidebar() {
   const { pathname } = useLocation();
+  const { questionId } = useParams();
   console.log(useLocation());
   return (
     <LayoutContainer>
@@ -88,7 +89,11 @@ export default function Sidebar() {
         <p>PUBLIC</p>
         <ul>
           <Link to="/">
-            <PublicList selected={pathname === "/" ? true : false}>
+            <PublicList
+              selected={
+                pathname === "/" || pathname === `/${questionId}` ? true : false
+              }
+            >
               <svg
                 aria-hidden="true"
                 width="18"
@@ -106,9 +111,11 @@ export default function Sidebar() {
               Tags
             </PublicList>
           </Link>
-          <PublicList selected={pathname === "/users" ? true : false}>
-            Users
-          </PublicList>
+          <Link to="/users">
+            <PublicList selected={pathname === "/users" ? true : false}>
+              Users
+            </PublicList>
+          </Link>
           <PublicList selected={pathname === "/companies" ? true : false}>
             Companies
           </PublicList>

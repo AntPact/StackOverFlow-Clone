@@ -11,6 +11,8 @@ import Signup from "./pages/Signup";
 import Tags from "./pages/Tags";
 import Users from "./pages/Users";
 
+const token = localStorage.getItem("accessToken");
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/ask",
+    // element: <>{token ? <QuestionAsk /> : <NotFound />}</>,
     element: <QuestionAsk />,
   },
   {
